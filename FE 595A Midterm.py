@@ -1,21 +1,17 @@
-#FE 595A
-#Midterm Assignment
-#Team Members: Esther, Claude & Ken
-#The initial code will be accepted to the project and we will modify as necessary
-
-
-
+import random
+from numpy import random
+import sys
 import re
 import numpy as np
 import glob
 import nltk
 from textblob import TextBlob, Word
+from textblob.en.sentiments import NaiveBayesAnalyzer
 from textblob.np_extractors import ConllExtractor
 from textblob.classifiers import NaiveBayesClassifier
 
 
-
-textcharacters = re.compile('[@_"!#$%^&*()<>?/\|}{~:;+]')
+textcharacters = re.compile('[@_!#$%^&*()<>?/\|}{~;+]')
 
 # Function checks if the string
 # contains any special character
@@ -43,23 +39,28 @@ if __name__ == '__main__' :
 
     bbb = len(string.split())
 
-    blob = TextBlob(string)
+    blob = TextBlob(string, analyzer= NaiveBayesAnalyzer())
     x = blob.sentiment
 
 
 
-    if bbb < 1100:
 
-        #print (string)
+    if bbb < 11:
 
         #print("Polarity is: " + str(x))
-        #print(x)
+
         userchoiceless7 = input('Type in response of process you would like to observe: ')
 
         if (userchoiceless7 == 'tags'):
             print('tags')
             print(blob.tags)
             pluralizeinput = input('Would you like to pluralize Nouns?')
+        elif (userchoiceless7 == 'sentiment'):
+            if x[0] == 'pos':
+                print('Positive')
+            else:
+                print('Negative')
+            #if x[0] == '''classification='pos''
         elif (userchoiceless7 == 'noun phrases'):
             print('noun phrases')
             print (blob.noun_phrases)
@@ -81,6 +82,7 @@ if __name__ == '__main__' :
                     print(blob.sentences[indexnumber-1].words[inflectioninput2].singularize())
                 else:
                     print('Thank you')
+
             else:
                 print ('Thank you.')
         elif (userchoiceless7 == 'translate'):
@@ -118,11 +120,19 @@ if __name__ == '__main__' :
             print('kjkjjk') # do something different here
 
 
-else:
-    print('the end')
 
 
+    else:
+
+        nouns = list()
 
 
+        for word, tag in blob.tags:
+            if tag == 'NN':
+                nouns.append(word.lemmatize())
 
+                print ("This text is about...")
 
+                for item in random.choice(nouns, 5):
+                    word = Word(item)
+                    print (word.pluralize())
