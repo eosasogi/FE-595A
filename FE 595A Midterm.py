@@ -21,10 +21,11 @@ def run(string):
         # this as argument in compile method
         # Pass the string in search
         if(textcharacters.search(string) == None):
-            print("String is accepted")
+            print("Your input has been accepted.")
+            print('The following options are available to process input text: Tags, Sentiment, Noun Phrases, Ngrams, Sentences and Translate')
 
         else:
-            print("String is not accepted.")
+            print("Your input has not been accepted.")
         return
 
 
@@ -32,7 +33,7 @@ def run(string):
 if __name__ == '__main__' :
 
     # Enter the string
-    string = name_input = input('Insert name: ')
+    string = name_input = input('Paste or type text that you would like to analyze here: ')
 
     # calling run function
     run(string)
@@ -43,89 +44,91 @@ if __name__ == '__main__' :
     x = blob.sentiment
 
 
-
-
-    if bbb < 11:
+    if bbb < 100:
 
         #print("Polarity is: " + str(x))
 
         userchoiceless7 = input('Type in response of process you would like to observe: ')
 
-        if (userchoiceless7 == 'tags'):
-            print('tags')
+        if (userchoiceless7.lower() == 'tags'):
             print(blob.tags)
-            pluralizeinput = input('Would you like to pluralize Nouns?')
-        elif (userchoiceless7 == 'sentiment'):
+            print ("Thank you!")
+        elif (userchoiceless7.lower() == 'sentiment'):
             if x[0] == 'pos':
-                print('Positive')
+                print('The sentiment of the input text is Positive')
+                print ("Thank you!")
+
             else:
-                print('Negative')
-            #if x[0] == '''classification='pos''
-        elif (userchoiceless7 == 'noun phrases'):
-            print('noun phrases')
+                print('The sentiment of the input text is Negative')
+                print ("Thank you!")
+
+        elif (userchoiceless7.lower() == 'noun phrases'):
             print (blob.noun_phrases)
-        elif (userchoiceless7 == 'ngrams'):
+            print ("Thank you!")
+        elif (userchoiceless7.lower() == 'ngrams'):
             print(blob.ngrams(2))
-        elif (userchoiceless7 == 'sentences'):
+            print ("Thank you!")
+        elif (userchoiceless7.lower() == 'sentences'):
             #sentenceinput = input('Type in response of process you would like to observe: ')
             print('Total number of words in text entered is : '+ str(len(blob.words)))
             print('Total number of sentences in text entered is : '+ str(len(blob.sentences)))
             indexnumber = int(input('Which sentence would you like to view?, Enter index number here: '))
             print ('The text below corresponds to sentence # ' + str(indexnumber) + ':')
-            print(blob.sentences[indexnumber-1])
+            if (indexnumber > 0):
+                print(blob.sentences[indexnumber-1])
+            else:
+                print(blob.sentences[0])
+
             wordcountinput = input('Would you like to count the number of words in sentence #' +str(indexnumber) + ' ? ')
-            if (wordcountinput) == 'yes':
+            if (wordcountinput.lower()) == 'yes':
                 print (len(blob.sentences[indexnumber-1].words))
                 inflectioninput= input('Would you like to display Word Inflection? ')
-                if inflectioninput == 'yes':
-                    inflectioninput2 = int(input('Enter any number index for the word you would like to singularize '))
+                if inflectioninput.lower() == 'yes':
+                    inflectioninput2 = int(input('Enter any number index for the word you would like to singularize: '))
                     print(blob.sentences[indexnumber-1].words[inflectioninput2].singularize())
-                else:
-                    print('Thank you')
-
-            else:
-                print ('Thank you.')
-        elif (userchoiceless7 == 'translate'):
-            print ('translate')
+                    print ("Thank you!")
+        elif (userchoiceless7.lower() == 'translate'):
             translate_response = input('Choose 1 translation option from the following list of languages: English, Arabic, Chinese, Spanish, Thai, Russian, Portuguese, Japenese, Greek, German, French, Dutch ')
-            if (translate_response == 'english'):
+            if (translate_response.lower() == 'english'):
                 print(blob.translate(to='en'))
-            elif (translate_response =='arabic'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='arabic'):
                 print(blob.translate(to='ar'))
-            elif (translate_response =='chinese'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='chinese'):
                 print(blob.translate(to='zh'))
-            elif (translate_response =='spanish'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='spanish'):
                 print(blob.translate(to='es'))
-            elif (translate_response =='thai'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='thai'):
                 print(blob.translate(to='th'))
-            elif (translate_response =='russian'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='russian'):
                 print(blob.translate(to='ru'))
-            elif (translate_response =='portuguese'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='portuguese'):
                 print(blob.translate(to='pt'))
-            elif (translate_response =='japenese'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='japenese'):
                 print(blob.translate(to='ja'))
-            elif (translate_response =='greek'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='greek'):
                 print(blob.translate(to='el'))
-            elif (translate_response =='german'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='german'):
                 print(blob.translate(to='de'))
-            elif (translate_response =='french'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='french'):
                 print(blob.translate(to='fr'))
-            elif (translate_response =='dutch'):
+                print ("Thank you!")
+            elif (translate_response.lower() =='dutch'):
                 print(blob.translate(to='nl'))
-            else:
-                print ('next lange')
-        else:
-        #print(bbb)
-            blob = TextBlob(string)
-            print('kjkjjk') # do something different here
-
-
-
+                print ("Thank you!")
 
     else:
 
         nouns = list()
-
 
         for word, tag in blob.tags:
             if tag == 'NN':
